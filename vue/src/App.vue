@@ -64,9 +64,6 @@ const content = {
   ],
 }
 
-const keys = Object.keys(content)
-// console.log('keys', keys)
-
 const gitContent = content[keysMap.GIT] // Массив объектов по GIT
 const jsContent = content[keysMap.JS] // Массив объектов по JS
 const objectsContent = content[keysMap.Objects] // Массив объектов по objects
@@ -83,7 +80,7 @@ const hotkeysContent = content[keysMap.Links] // Массив объектов �
   <div :class="$style.container">
     <HelloWorld class="mb8"/>
 
-    <AppContent :navigation="keys" :content="content" />
+    <AppContent :content="content" />
   </div>
 </template>
 
@@ -101,6 +98,12 @@ body {
           rgb(10, 10, 20) 100%
   );
   min-height: 100vh;
+
+  // Блокируем селект текста
+  user-select: none;       /* стандарт */
+  -webkit-user-select: none; /* для Safari */
+  -moz-user-select: none;    /* для Firefox */
+  -ms-user-select: none;     /* для старого IE/Edge */
 }
 
 .container {
