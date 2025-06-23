@@ -1,0 +1,72 @@
+import { defineConfig, presetUno, presetAttributify } from 'unocss'
+
+export default defineConfig({
+  theme: {
+    colors: {
+      'black': '#1a1a1a',
+      'white': '#ffffff',
+      'gray': {
+        '100': '#f7f7f7',
+        '200': '#f2f2f2',
+        '300': '#e1e1e1',
+        '400': '#d9d9d9',
+        '500': '#c3c3c3',
+        '600': '#aaaaaa',
+        '700': '#8d8d8d',
+        '800': '#646464',
+        '900': '#3d4043',
+      },
+      'red': '#ec0002',
+      'blue': {
+        '100': '#edf4ff',
+        '400': '#63a1ff',
+        '500': '#3c8aff',
+        '600': '#0750c2',
+        '700': '#003fa1',
+        '800': '#002a6c',
+        '900': '#002256',
+      },
+      'orange': {
+        '100': '#f89e1f',
+        '200': '#fd970d',
+        '300': '#fe8a01',
+        '400': '#ff8700',
+        '500': '#ff4800',
+        '600': '#f02800',
+      },
+      'grayish-blue': '#6b8294',
+      'light-gold': '#f7bc69',
+      'bright-green': '#039c00',
+      'dark-purple': '#5b2599',
+      'deep-purple': '#5c2d90',
+      'light-turquoise': '#65d0dd',
+    },
+    breakpoints: {
+      md: '768px',
+      xl: '1280px',
+      xxl: '1440px',
+    },
+  },
+  presets: [
+    presetUno(),
+    presetAttributify()
+  ],
+  rules: [
+    [/^area-(.*)$/, ([_, name]) => ({ 'grid-area': name })],
+    [/^gap-([\.\d]+)$/, ([_, num]) => ({ gap: `${num}px` })],
+    [/^m-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px` })],
+    [/^mt-([\.\d]+)$/, ([_, num]) => ({ 'margin-top': `${num}px` })],
+    [/^mr-([\.\d]+)$/, ([_, num]) => ({ 'margin-right': `${num}px` })],
+    [/^mb-([\.\d]+)$/, ([_, num]) => ({ 'margin-bottom': `${num}px` })],
+    [/^ml-([\.\d]+)$/, ([_, num]) => ({ 'margin-left': `${num}px` })],
+    [/^my-([\.\d]+)$/, ([_, num]) => ({ 'margin-top': `${num}px`, 'margin-bottom': `${num}px` })],
+    [/^mx-([\.\d]+)$/, ([_, num]) => ({ 'margin-right': `${num}px`, 'margin-left': `${num}px` })],
+    [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px` })],
+    [/^pt-([\.\d]+)$/, ([_, num]) => ({ 'padding-top': `${num}px` })],
+    [/^pr-([\.\d]+)$/, ([_, num]) => ({ 'padding-right': `${num}px` })],
+    [/^pb-([\.\d]+)$/, ([_, num]) => ({ 'padding-bottom': `${num}px` })],
+    [/^pl-([\.\d]+)$/, ([_, num]) => ({ 'padding-left': `${num}px` })],
+    [/^py-([\.\d]+)$/, ([_, num]) => ({ 'padding-top': `${num}px`, 'padding-bottom': `${num}px` })],
+    [/^px-([\.\d]+)$/, ([_, num]) => ({ 'padding-right': `${num}px`, 'padding-left': `${num}px` })],
+  ],
+})

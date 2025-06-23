@@ -1,0 +1,36 @@
+// COLORS
+
+$black: #1a1a1a;
+$zeroway: rgb(33, 29, 37);
+$white: #ffffff;
+$red: #ff0000;
+$grayblack: #0F0F0F;
+$background: linear-gradient(360deg, rgb(15 23 42), rgb(33, 29, 37));
+$background-opacity: 0.9;
+
+
+$colors: (
+  'black': $black,
+  'zeroway': $zeroway,
+  'white': $white,
+  'red': $red,
+  'grayblack': $grayblack,
+  'background': $background,
+  'background-opacity': $background-opacity,
+);
+
+// FONTS
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('~assets/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+$sm: 600px; // small
+$md: 768px; // medium
+$lg: 1024px; // large
+$xl: 1280px; // extra large
+$xxl: 1440px; // extra extra large

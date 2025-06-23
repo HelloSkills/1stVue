@@ -1,0 +1,36 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  font-family: "JetBrainsMono", monospace;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+body {
+  height: 100%;
+  position: relative;
+  font-size: 13.6px;
+  margin: 0;
+  color: white;
+  background: var(--lb-background, linear-gradient(360deg, rgb(15, 23, 42), rgb(33, 29, 37)));
+  font-family: "JetBrainsMono", monospace;
+
+  font-variant-numeric: lining-nums tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+}
+
+a {
+  text-decoration: none;
+}
