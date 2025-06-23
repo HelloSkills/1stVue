@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<div :class="$style.temp" class="text-white"> Hello World </div>
+<div :class="$style.temp" class="text-white"> HelloSkills Memory </div>
 </template>
 
 <style lang="scss" module>

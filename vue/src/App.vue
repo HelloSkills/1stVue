@@ -4,19 +4,21 @@ import AppContent from './components/AppContent.vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 const keysMap = {
-  'GIT': 'git',
-  'JS': 'js',
-  'Objects': 'objects',
-  'Arrays': 'arrays',
-  'Styles': 'styles',
-  'Vue': 'vue',
-  'Nuxt': 'nuxt',
-  'Links': 'links',
+  'GIT': 'GIT',
+  'JS': 'JS',
+  'Objects': 'OBJECT',
+  'Arrays': 'ARRAYS',
+  'Styles': 'STYLES',
+  'Vue': 'VUE',
+  'Nuxt': 'NUXT',
+  'Links': 'LINKS',
+  'Hotkeys': 'HOTKEYS',
 }
 
 const content = {
   [keysMap.GIT]: [
     { title: 'git clone <url>', text: 'Клонировать удалённый репозиторий на локальную машину' },
+    { title: 'git remote -v\n', text: 'Показывает связку с гитом (куда / откуда)' },
     { title: 'git status', text: 'Показать текущее состояние репозитория (изменения, ветки)' },
     { title: 'git add <файл>', text: 'Добавить файл(ы) в индекс (готовность к коммиту)' },
     { title: 'git add .', text: 'Добавить все файлы в индекс (готовность к коммиту)' },
@@ -56,31 +58,40 @@ const content = {
     {title: ''},
     {text: ''}
   ],
+  [keysMap.Hotkeys]: [
+    {title: ''},
+    {text: ''}
+  ],
 }
 
-const gitConent = content[keysMap.GIT] // Массив объектов по GIT
-const jsConent = content[keysMap.JS] // Массив объектов по JS
-const objectsConent = content[keysMap.Objects] // Массив объектов по objects
-const arraysConent = content[keysMap.Arrays] // Массив объектов по Arrays
-const stylesConent = content[keysMap.Styles] // Массив объектов по Styles
-const vueConent = content[keysMap.Vue] // Массив объектов по Vue
-const nuxtConent = content[keysMap.Nuxt] // Массив объектов по Nuxt
-const linksConent = content[keysMap.Links] // Массив объектов по Links
+const keys = Object.keys(content)
+// console.log('keys', keys)
 
-// console.log(content[keysMap.GIT])
+const gitContent = content[keysMap.GIT] // Массив объектов по GIT
+const jsContent = content[keysMap.JS] // Массив объектов по JS
+const objectsContent = content[keysMap.Objects] // Массив объектов по objects
+const arraysContent = content[keysMap.Arrays] // Массив объектов по Arrays
+const stylesContent = content[keysMap.Styles] // Массив объектов по Styles
+const vueContent = content[keysMap.Vue] // Массив объектов по Vue
+const nuxtContent = content[keysMap.Nuxt] // Массив объектов по Nuxt
+const linksContent = content[keysMap.Links] // Массив объектов по Links
+const hotkeysContent = content[keysMap.Links] // Массив объектов по Hotkeys
+
 </script>
 
 <template>
   <div :class="$style.container">
     <HelloWorld class="mb8"/>
 
-    <AppContent :content="gitConent" />
+    <AppContent :navigation="keys" :content="content" />
   </div>
 </template>
 
 <style lang="scss" module>
 
 body {
+
+  font-family: "JetBrains Mono";
   background: linear-gradient(
           to bottom,
           rgb(15, 13, 25) 0%,
