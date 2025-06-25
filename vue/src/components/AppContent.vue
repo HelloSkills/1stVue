@@ -1,16 +1,18 @@
 <script setup>
 import {computed, ref} from "vue";
 const props = defineProps({
-  content: Object,
-  activeIndex: Number | null
+  selectedMenu: Array | null,
 })
 
-const keys = Object.keys(props.content)
-const activeKey = computed(() => {
-  const activeIndex = props.activeIndex
-  const key = keys[activeIndex]
-  return key
+computed(() => {
+  console.log('props.selectedMenu', props.selectedMenu)
 })
+// const keys = Object.keys(props.content)
+// const activeKey = computed(() => {
+//   const activeIndex = props.activeIndex
+//   const key = keys[activeIndex]
+//   return key
+// })
 
 // Скрытие text по клику на title
 const activeText = ref(new Set())
@@ -24,9 +26,9 @@ function toggleText(index) {
 </script>
 
 <template>
-  <div v-if="activeKey" :class="$style.wrap" class="flex-col mt-16">
-    <div :class="$style.content"
-         v-for="(content, index) in props.content[activeKey]"
+  <div :class="$style.wrap" class="flex-col mt-16">
+    <div v-if="selectedMenu" :class="[$style.content, activeText.has(index) == true ? $style.active : '']"
+         v-for="(content, index) in props.selectedMenu"
          :key="index"
     >
       <div :class="$style.title" class="text-green" @click="toggleText(index)"> {{content.title}} </div>
@@ -41,6 +43,7 @@ function toggleText(index) {
   flex-direction: row;
   gap: 16px;
   justify-content: center;
+  align-items: center;
   color: white;
   margin: auto;
   width: max-content;
@@ -53,8 +56,12 @@ function toggleText(index) {
   flex-direction: column;
   justify-content: center;
   gap: 16px;
-  width: 100%;
   padding: 10px;
   border-radius: 10px;
+  width: 200px;
+}
+
+.active {
+  width: 900px;
 }
 </style>

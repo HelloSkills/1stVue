@@ -1,7 +1,9 @@
 <script setup>
+import {computed, ref} from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import AppMenu from './components/AppMenu.vue'
 import Memory from './components/memory.vue'
+import AppContent from "@/components/AppContent.vue";
 
 const keysMap = {
   'GIT': 'GIT',
@@ -15,6 +17,8 @@ const keysMap = {
   'Hotkeys': 'HOTKEYS',
 }
 
+const keys = Object.values(keysMap)
+// console.log('keys', keys)
 const content = {
   [keysMap.GIT]: [
     { title: 'git clone <url>', text: 'Клонировать удалённый репозиторий на локальную машину' },
@@ -166,6 +170,17 @@ const content = {
   ],
 }
 
+const activeIndex = ref(null)
+function handleChangeActiveIndex(index) {
+  activeIndex.value = activeIndex.value === index ? null : index
+}
+const selectedMenu = computed(() => {
+  if (activeIndex.value == null) {
+    return null
+  }
+  const activeKey = keys[activeIndex.value]
+  return content[activeKey]
+})
 // const gitContent = content[keysMap.GIT] // Массив объектов по GIT
 // const jsContent = content[keysMap.JS] // Массив объектов по JS
 // const objectsContent = content[keysMap.Objects] // Массив объектов по objects
@@ -181,8 +196,12 @@ const content = {
 <template>
   <div :class="$style.container">
     <Memory class="mb8"/>
-
-    <AppMenu :content="content" />
+    <AppMenu
+        :items="keys"
+        :activeIndex="activeIndex"
+        @changeActiveIndex="handleChangeActiveIndex"
+    />
+    <AppContent :selectedMenu="selectedMenu" />
   </div>
 </template>
 

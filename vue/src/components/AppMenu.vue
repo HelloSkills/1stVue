@@ -2,23 +2,25 @@
 import {computed, onMounted, ref} from 'vue'
 import AppContent from './AppContent.vue'
 const props = defineProps({
-  content: Object,
+  items: Array,
+  activeIndex: Number | null
 })
-const keys = Object.keys(props.content)
-const activeIndex = ref(null) // реактивная для индекса ключей
+const emit = defineEmits(['changeActiveIndex'])
+function onClick(index) {
+  emit('changeActiveIndex', index)
+}
 </script>
 
 <template>
   <div :class="$style.container">
-    <div v-for="(menu, index) in keys"
+    <div v-for="(item, index) in items"
          :key="index"
          :class="[$style.navigation, activeIndex === index ? $style.active : '']"
-         @click="activeIndex = activeIndex === index ? null : index"
+         @click="onClick(index)"
     >
-      {{menu}}
+      {{item}}
     </div>
   </div>
-  <AppContent :content="content" :activeIndex="activeIndex" />
 </template>
 
 <style lang="scss" module>
@@ -60,17 +62,5 @@ const activeIndex = ref(null) // реактивная для индекса кл
   background-color: rgba(70, 65, 110, 0.8);
   box-shadow: 0 0 10px rgba(120, 110, 180, 0.9);
   transform: scale(1.07);
-}
-
-.content {
-  background: rgb(28, 24, 40); // тёмно-фиолетовый, чуть светлее фона
-  border: 1px solid rgba(255, 255, 255, 0.05); // мягкая граница
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
 }
 </style>
