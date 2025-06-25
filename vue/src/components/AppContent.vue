@@ -1,73 +1,58 @@
 <script setup>
-import { ref } from 'vue'
+import {computed, ref} from "vue";
 const props = defineProps({
   content: Object,
+  activeIndex: Number | null
 })
 
 const keys = Object.keys(props.content)
-console.log('keys', keys)
-const activeIndex = ref(null)
+const activeKey = computed(() => {
+  const activeIndex = props.activeIndex
+  const key = keys[activeIndex]
+  return key
+})
+
+// Скрытие text по клику на title
+const activeText = ref(new Set())
+function toggleText(index) {
+  if (activeText.value.has(index)) {
+    activeText.value.delete(index)
+  } else {
+    activeText.value.add(index)
+  }
+}
 </script>
 
 <template>
-  <div :class="$style.container">
-    <div v-for="(menu, index) in keys"
+  <div v-if="activeKey" :class="$style.wrap" class="flex-col mt-16">
+    <div :class="$style.content"
+         v-for="(content, index) in props.content[activeKey]"
          :key="index"
-         :class="[$style.navigation, activeIndex === index ? $style.active : '']"
-         @click="activeIndex = activeIndex === index ? null : index"
     >
-      {{menu}}
+      <div :class="$style.title" class="text-green" @click="toggleText(index)"> {{content.title}} </div>
+      <div :class="$style.text" v-show="activeText.has(index)"> {{content.text}} </div>
     </div>
   </div>
-  <!--<div :class="$style.temp" v-for="content in props.content" :key="index" > {{content.title}} | {{content.text}} </div>-->
 </template>
 
 <style lang="scss" module>
-.container {
+.wrap {
   display: flex;
   flex-direction: row;
   gap: 16px;
   justify-content: center;
   color: white;
-  width: max-content;
   margin: auto;
+  width: max-content;
 }
 
-.navigation {
-  padding: 0.6em 1.2em;
-  color: #bbb;
-  font-weight: 600;
-  //font-family: 'JetBrains Mono', monospace;
-  cursor: pointer;
-  border-radius: 8px;
-  user-select: none;
-  transition:
-      background-color 0.3s ease,
-      color 0.3s ease,
-      transform 0.2s ease,
-      box-shadow 0.3s ease;
-
-  &:hover,
-  &:focus-visible {
-    color: #ddd;
-    background-color: rgba(45, 42, 70, 0.6);
-    box-shadow: 0 0 6px rgba(100, 90, 160, 0.6);
-    transform: scale(1.05);
-    outline: none;
-  }
-}
-
-.active {
-  color: #b8a8ff;
-  background-color: rgba(70, 65, 110, 0.8);
-  box-shadow: 0 0 10px rgba(120, 110, 180, 0.9);
-  transform: scale(1.07);
-}
-
-.temp {
+.content {
   background: rgb(28, 24, 40); // тёмно-фиолетовый, чуть светлее фона
   border: 1px solid rgba(255, 255, 255, 0.05); // мягкая граница
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
