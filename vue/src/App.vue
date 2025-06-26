@@ -106,12 +106,12 @@ const content = {
       items: [
         {
           title: 'Function Declaration – Обычное объявление функции',
-          text: `Пример: \n
-function sayHi() {
+          text: `
+**function sayHi() {
   console.log("Hi")
-}
+}**
 
-Особенности: \n
+Особенности:
 ✔ Поднимается (hoisting) — можно вызвать до определения
 ✔ Именованная функция — отображается в стеке ошибок
 ✔ this определяется в момент вызова
@@ -119,12 +119,12 @@ function sayHi() {
         },
         {
           title: 'Function Expression – Функциональное выражение',
-          text: `Пример: \n
-const sayHi = function() {
+          text: `
+**const sayHi = function() {
   console.log("Hi")
-}
+}**
 
-Особенности: \n
+Особенности:
 ✘ Не поднимается — нельзя вызывать до объявления
 ✔ Может быть анонимной или с именем
 ✔ Можно передавать как аргумент
@@ -132,10 +132,9 @@ const sayHi = function() {
         },
         {
           title: 'Arrow Function – Стрелочная функция',
-          text: `Пример: \n
-const sayHi = () => console.log("Hi")
+          text: `**const sayHi = () => console.log("Hi")**
 
-Особенности: \n
+Особенности:
 ✔ Короткий синтаксис
 ✘ Не имеет своего this, arguments, super
 ✘ Нельзя использовать как конструктор (через new)
@@ -143,14 +142,14 @@ const sayHi = () => console.log("Hi")
         },
         {
           title: 'Method Definition – Метод объекта',
-          text: `Пример: \n
-const obj = {
+          text: `
+**const obj = {
   sayHi() {
     console.log("Hi")
   }
-}
+}**
 
-Особенности: \n
+Особенности:
 ✔ Краткий синтаксис
 ✔ this ссылается на объект
 ✘ Не поднимается
@@ -158,12 +157,12 @@ const obj = {
         },
         {
           title: 'IIFE – Самовызывающаяся функция',
-          text: `Пример: \n
-(function() {
+          text: `
+**(function() {
   console.log("Run once")
-})()
+})()**
 
-Особенности: \n
+Особенности:
 ✔ Выполняется сразу после объявления
 ✔ Часто используется для изоляции переменных
 ✔ Можно использовать и со стрелочной: (() => {})()
