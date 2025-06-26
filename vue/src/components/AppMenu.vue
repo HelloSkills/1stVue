@@ -7,6 +7,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['changeActiveIndex'])
 function onClick(index) {
+  // console.log('Emitik', index)
   emit('changeActiveIndex', index)
 }
 </script>

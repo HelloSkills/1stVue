@@ -1,18 +1,18 @@
 <script setup>
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 const props = defineProps({
   selectedMenu: Array | null,
 })
 
-computed(() => {
-  console.log('props.selectedMenu', props.selectedMenu)
-})
-// const keys = Object.keys(props.content)
-// const activeKey = computed(() => {
-//   const activeIndex = props.activeIndex
-//   const key = keys[activeIndex]
-//   return key
-// })
+watch(
+    () => props.selectedMenu,
+    (newVal, oldVal) => {
+      console.log(props.selectedMenu, newVal, oldVal)
+      if (newVal !== oldVal) {
+        activeText.value.clear()
+      }
+    }
+)
 
 // Скрытие text по клику на title
 const activeText = ref(new Set())
@@ -27,15 +27,35 @@ function toggleText(index) {
 
 <template>
   <div :class="$style.wrap" class="flex-col mt-16">
-    <div v-if="selectedMenu" :class="[$style.content, activeText.has(index) == true ? $style.active : '']"
-         v-for="(content, index) in props.selectedMenu"
-         :key="index"
+    <div
+        v-for="(content, index) in selectedMenu"
+        :key="index"
+        :class="[$style.content, activeText.has(index) ? $style.active : '']"
     >
-      <div :class="$style.title" class="text-green" @click="toggleText(index)"> {{content.title}} </div>
-      <div :class="$style.text" v-show="activeText.has(index)"> {{content.text}} </div>
+      <div
+          :class="$style.title"
+          class="text-green"
+          @click="toggleText(index)"
+      >
+        {{ content.title }}
+      </div>
+
+      <div v-show="activeText.has(index)" :class="$style.text">
+        <!-- Если есть вложенные items — вызываем этот компонент рекурсивно -->
+        <RecursiveContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" />
+
+        <!-- Если нет вложенных items — показываем текст -->
+        <div v-else>{{ content.text }}</div>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'RecursiveContent'
+}
+</script>
 
 <style lang="scss" module>
 .wrap {
@@ -46,7 +66,7 @@ function toggleText(index) {
   align-items: center;
   color: white;
   margin: auto;
-  width: max-content;
+  width: 100%;
 }
 
 .content {
@@ -56,12 +76,23 @@ function toggleText(index) {
   flex-direction: column;
   justify-content: center;
   gap: 16px;
-  padding: 10px;
+  padding: 16px;
   border-radius: 10px;
   width: 200px;
+
 }
 
+.text {
+  white-space: pre;
+}
+
+//.items {
+//  width: 100px;
+//}
+
 .active {
-  width: 900px;
+  min-width: 200px;
+  width: 700px;
+  //width: max-content;
 }
 </style>

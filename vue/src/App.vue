@@ -38,7 +38,8 @@ const content = {
     {title: '', text: ''},
   ],
   [keysMap.Objects]: [
-    {title: '', text: ''},
+    {title: 'Object.keys(obj)', text: 'Возвращает массив всех ключей (имён свойств) переданного объекта.'},
+    {title: 'Object.values(obj)', text: 'Возвращает массив всех значений (значений свойств) переданного объекта.'},
   ],
   [keysMap.Arrays]: [
     {title: '', text: ''},
@@ -47,28 +48,44 @@ const content = {
     {title: '', text: ''},
   ],
   [keysMap.Vue]: [
-    { title: 'v-if', text: 'Условный рендеринг элемента (если условие true — отрисовывается)' },
-    { title: 'v-else-if', text: 'Дополнительное условие для v-if (аналог else if)' },
-    { title: 'v-else', text: 'Блок, выполняющийся если все предыдущие v-if / v-else-if — false' },
+    {title: 'Vue - директивы', items: [
+        { title: 'v-if', text: 'Условный рендеринг элемента (если условие true — отрисовывается)' },
+        { title: 'v-else-if', text: 'Дополнительное условие для v-if (аналог else if)' },
+        { title: 'v-else', text: 'Блок, выполняющийся если все предыдущие v-if / v-else-if — false' },
 
-    { title: 'v-show', text: 'Показывает/скрывает элемент через display: none (не удаляет из DOM)' },
+        { title: 'v-show', text: 'Показывает/скрывает элемент через display: none (не удаляет из DOM)' },
 
-    { title: 'v-for', text: 'Цикл по массиву или объекту (пример: v-for="(item, index) in items")' },
+        { title: 'v-for', text: 'Цикл по массиву или объекту (пример: v-for="(item, index) in items")' },
 
-    { title: 'v-bind', text: 'Привязывает значение к атрибуту (пример: :src="img")' },
-    { title: ':', text: 'Сокращение для v-bind (пример: :href="link")' },
+        { title: 'v-bind', text: 'Привязывает значение к атрибуту (пример: :src="img")' },
+        { title: ':', text: 'Сокращение для v-bind (пример: :href="link")' },
 
-    { title: 'v-model', text: 'Двусторонняя привязка данных (для input, select, textarea и компонентов)' },
+        { title: 'v-model', text: 'Двусторонняя привязка данных (для input, select, textarea и компонентов)' },
 
-    { title: 'v-on', text: 'Обработка событий (пример: v-on:click="handleClick")' },
-    { title: '@', text: 'Сокращение для v-on (пример: @click="handleClick")' },
+        { title: 'v-on', text: 'Обработка событий (пример: v-on:click="handleClick")' },
+        { title: '@', text: 'Сокращение для v-on (пример: @click="handleClick")' },
 
-    { title: 'v-slot', text: 'Определяет слот и его имя в компоненте (пример: v-slot:header)' },
-    { title: '#', text: 'Сокращение для v-slot (пример: #header)' },
+        { title: 'v-slot', text: 'Определяет слот и его имя в компоненте (пример: v-slot:header)' },
+        { title: '#', text: 'Сокращение для v-slot (пример: #header)' },
 
-    { title: 'v-pre', text: 'Пропускает компиляцию внутри элемента (отображает как есть)' },
-    { title: 'v-cloak', text: 'Скрывает элемент до полной инициализации Vue (обычно с CSS)' },
-    { title: 'v-once', text: 'Рендерит элемент только один раз и больше не обновляет его' },
+        { title: 'v-pre', text: 'Пропускает компиляцию внутри элемента (отображает как есть)' },
+        { title: 'v-cloak', text: 'Скрывает элемент до полной инициализации Vue (обычно с CSS)' },
+        { title: 'v-once', text: 'Рендерит элемент только один раз и больше не обновляет его' },
+      ]},
+    { title: 'watch', text: 'const props = defineProps({ value: String })\n' +
+          '\n' +
+          'watch(\n' +
+          '  () => props.value,\n' +
+          '  (newVal, oldVal) => {\n' +
+          '    console.log(\'Пропс value изменился с\', oldVal, \'на\', newVal)\n' +
+          '\n' +
+          '    if (newVal !== oldVal) {\n' +
+          '      // Значение действительно изменилось — можно выполнять нужные действия\n' +
+          '      console.log(\'Значение обновлено, делаем нужные операции\')\n' +
+          '      // Например, обновляем локальное состояние, вызываем API и т.п.\n' +
+          '    }\n' +
+          '  }\n' +
+          ')' },
   ]
   ,
   [keysMap.Nuxt]: [
@@ -170,9 +187,12 @@ const content = {
   ],
 }
 
+
 const activeIndex = ref(null)
 function handleChangeActiveIndex(index) {
+  // console.log('Handle do', activeIndex.value)
   activeIndex.value = activeIndex.value === index ? null : index
+  // console.log('Handle posle', activeIndex.value)
 }
 const selectedMenu = computed(() => {
   if (activeIndex.value == null) {
