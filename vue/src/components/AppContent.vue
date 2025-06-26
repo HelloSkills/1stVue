@@ -27,15 +27,11 @@ function toggleText(index) {
 </script>
 
 <template>
-  <div v-if="selectedMenu.length" :class="$style.wrap" class="flex-col mt-16">
+  <div :class="$style.wrap" class="flex-col mt-16">
     <div
         v-for="(content, index) in selectedMenu"
         :key="index"
-        :class="[
-  $style.content,
-  activeText.has(index) && content.items ? $style.active : '',
-  !content.items ? '' : $style.contentTextOnly
-]"
+        :class="[$style.content, activeText.has(index) && content.items ? $style.active : '', !content.items ? '' : $style.contentTextOnly]"
     >
       <div
           :class="$style.title"
@@ -47,7 +43,7 @@ function toggleText(index) {
 
       <div v-show="activeText.has(index)" :class="$style.text">
         <RecursiveContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" class="mt-16 mb-24"/>
-        <div v-else>{{ content.text }}</div>
+        <div v-else class="text-left ml-16">{{ content.text }}</div>
       </div>
     </div>
   </div>
@@ -69,7 +65,7 @@ export default {
   color: white;
   margin: auto;
   width: 100%;
-  box-sizing: border-box;
+
 }
 
 .content {
@@ -78,21 +74,18 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: left;
   gap: 16px;
   padding: 16px;
   border-radius: 10px;
   max-width: 800px;
   width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .text {
-  white-space: pre;
-}
-
-
-.active {
-  //width: 100%;
-  //width: 800px;
+  white-space: pre-line;
 }
 
 .contentTextOnly {
