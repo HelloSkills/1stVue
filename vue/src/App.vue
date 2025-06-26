@@ -1,9 +1,13 @@
 <script setup>
 import {computed, ref} from 'vue'
+import MarkdownIt from 'markdown-it'
 import { RouterLink, RouterView } from 'vue-router'
 import AppMenu from './components/AppMenu.vue'
 import Memory from './components/memory.vue'
 import AppContent from "@/components/AppContent.vue";
+
+
+const md = new MarkdownIt()
 
 const keysMap = {
   'GIT': 'GIT',
@@ -40,59 +44,60 @@ const content = {
       items: [
         {
           title: '🔢 Примитивные типы данных',
-          text: `string – Строка: "Hello", 'world', \`template\`
+          text: `- **string** – Строка: "Hello", 'world', \`template\`
 
-number – Число: 42, 3.14, NaN, Infinity
+- **number** – Число: 42, 3.14, NaN, Infinity
 
-bigint – Большие числа: 1234567890123456789012345678901234567890n
+- **bigint** – Большие числа: 1234567890123456789012345678901234567890n
 
-boolean – Логический тип: true, false
+- **boolean** – Логический тип: true, false
 
-undefined – Тип значения, которое не было присвоено
+- **undefined** – Тип значения, которое не было присвоено
 
-null – Пустое или неизвестное значение
+- **null** – Пустое или неизвестное значение
 
-symbol – Уникальные идентификаторы: Symbol("id")`
+- **symbol** – Уникальные идентификаторы: Symbol("id")`
         },
         {
           title: '📦 Ссылочные (объектные) типы',
-          text: `object – Объекты: { name: "JS" }
+          text: `- **object** – Объекты: { name: "JS" }
 
-array – Массивы: [1, 2, 3]
+- **array** – Массивы: [1, 2, 3]
 
-function – Функции: function() {}, () => {}
+- **function** – Функции: function() {}, () => {}
 
-date – Дата: new Date()
+- **date** – Дата: new Date()
 
-regexp – Регулярные выражения: /abc/i
+- **regexp** – Регулярные выражения: /abc/i
 
-error – Ошибки: new Error("message")
+- **error** – Ошибки: new Error("message")
 
-map – Коллекции ключ/значение: new Map()
+- **map** – Коллекции ключ/значение: new Map()
 
-set – Уникальные значения: new Set()
+- **set** – Уникальные значения: new Set()
 
-weakmap – Слабые коллекции: new WeakMap()
+- **weakmap** – Слабые коллекции: new WeakMap()
 
-weakset – Слабые уникальные коллекции: new WeakSet()`
+- **weakset** – Слабые уникальные коллекции: new WeakSet()`
         },
         {
           title: '🧪 Проверка типов',
-          text: `typeof – typeof 42 // "number"
+          text: `- **typeof** – typeof 42 // "number"
 
-Array.isArray() – Array.isArray([1, 2]) // true
+- **Array.isArray()** – Array.isArray([1, 2]) // true
 
-instanceof – {} instanceof Object // true
+- **instanceof** – {} instanceof Object // true
 
-Object.prototype.toString – Object.prototype.toString.call(null) // "[object Null]"`
+- **Object.prototype.toString** – Object.prototype.toString.call(null)
+// "[object Null]"`
         },
         {
           title: '📌 Особенности',
-          text: `null — это object – typeof null === "object" — историческая ошибка
+          text: `- **null** — это object – typeof null === "object" — историческая ошибка
 
-NaN — число – typeof NaN === "number"
+- **NaN** — число – typeof NaN === "number"
 
-undefined !== null – undefined — нет значения, null — намеренно пусто`
+- **undefined !== null** – undefined — нет значения, null — намеренно пусто`
         }
       ]
     },
@@ -423,21 +428,12 @@ const selectedMenu = computed(() => {
   const activeKey = keys[activeIndex.value]
   return content[activeKey]
 })
-// const gitContent = content[keysMap.GIT] // Массив объектов по GIT
-// const jsContent = content[keysMap.JS] // Массив объектов по JS
-// const objectsContent = content[keysMap.Objects] // Массив объектов по objects
-// const arraysContent = content[keysMap.Arrays] // Массив объектов по Arrays
-// const stylesContent = content[keysMap.Styles] // Массив объектов по Styles
-// const vueContent = content[keysMap.Vue] // Массив объектов по Vue
-// const nuxtContent = content[keysMap.Nuxt] // Массив объектов по Nuxt
-// const linksContent = content[keysMap.Links] // Массив объектов по Links
-// const hotkeysContent = content[keysMap.Links] // Массив объектов по Hotkeys
 
 </script>
 
 <template>
   <div :class="$style.container">
-    <Memory class="mb8"/>
+    <Memory class="mt-8 mb-16"/>
     <AppMenu
         :items="keys"
         :activeIndex="activeIndex"
@@ -448,10 +444,7 @@ const selectedMenu = computed(() => {
 </template>
 
 <style lang="scss" module>
-
 body {
-
-  box-sizing: border-box;
   font-family: "JetBrains Mono";
   background: linear-gradient(
           to bottom,
