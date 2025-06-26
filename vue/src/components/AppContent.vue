@@ -7,7 +7,8 @@ const props = defineProps({
 watch(
     () => props.selectedMenu,
     (newVal, oldVal) => {
-      console.log(props.selectedMenu, newVal, oldVal)
+      // console.log(props.selectedMenu, newVal, oldVal)
+      // console.log('props.selectedMenu', props.selectedMenu[0].title.length)
       if (newVal !== oldVal) {
         activeText.value.clear()
       }
@@ -26,7 +27,7 @@ function toggleText(index) {
 </script>
 
 <template>
-  <div :class="$style.wrap" class="flex-col mt-16">
+  <div v-if="selectedMenu.length" :class="$style.wrap" class="flex-col mt-16">
     <div
         v-for="(content, index) in selectedMenu"
         :key="index"

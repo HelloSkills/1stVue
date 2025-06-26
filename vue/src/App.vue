@@ -18,7 +18,7 @@ const keysMap = {
 }
 
 const keys = Object.values(keysMap)
-// console.log('keys', keys)
+
 const content = {
   [keysMap.GIT]: [
     { title: 'git clone <url>', text: 'Клонировать удалённый репозиторий на локальную машину' },
@@ -35,17 +35,14 @@ const content = {
     { title: 'git log', text: 'Показать историю коммитов' }
   ],
   [keysMap.JS]: [
-    {title: '', text: ''},
   ],
   [keysMap.Objects]: [
     {title: 'Object.keys(obj)', text: 'Возвращает массив всех ключей (имён свойств) переданного объекта.'},
     {title: 'Object.values(obj)', text: 'Возвращает массив всех значений (значений свойств) переданного объекта.'},
   ],
   [keysMap.Arrays]: [
-    {title: '', text: ''},
   ],
   [keysMap.Styles]: [
-    {title: '', text: ''},
   ],
   [keysMap.Vue]: [
     {
@@ -161,8 +158,7 @@ onDeactivated(() => {
       ]
     }
   ],
-      [keysMap.Nuxt]: [
-    {title: '', text: ''},
+  [keysMap.Nuxt]: [
   ],
   [keysMap.Links]: [
     {
@@ -232,7 +228,7 @@ onDeactivated(() => {
       ]
     }
   ],
-      [keysMap.Hotkeys]: [
+  [keysMap.Hotkeys]: [
     // 🔄 Редактирование и работа с кодом
     { title: 'Дублировать строку/блок', text: 'Ctrl + D' },
     { title: 'Удалить строку', text: 'Ctrl + Y' },
