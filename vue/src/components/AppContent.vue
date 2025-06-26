@@ -30,7 +30,11 @@ function toggleText(index) {
     <div
         v-for="(content, index) in selectedMenu"
         :key="index"
-        :class="[$style.content, activeText.has(index) ? $style.active : '']"
+        :class="[
+  $style.content,
+  activeText.has(index) && content.items ? $style.active : '',
+  !content.items ? '' : $style.contentTextOnly
+]"
     >
       <div
           :class="$style.title"
@@ -41,10 +45,7 @@ function toggleText(index) {
       </div>
 
       <div v-show="activeText.has(index)" :class="$style.text">
-        <!-- Если есть вложенные items — вызываем этот компонент рекурсивно -->
-        <RecursiveContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" />
-
-        <!-- Если нет вложенных items — показываем текст -->
+        <RecursiveContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" class="mt-16 mb-24"/>
         <div v-else>{{ content.text }}</div>
       </div>
     </div>
@@ -67,6 +68,7 @@ export default {
   color: white;
   margin: auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .content {
@@ -78,21 +80,24 @@ export default {
   gap: 16px;
   padding: 16px;
   border-radius: 10px;
-  width: 200px;
-
+  max-width: 800px;
+  width: 100%;
 }
 
 .text {
   white-space: pre;
 }
 
-//.items {
-//  width: 100px;
-//}
 
 .active {
-  min-width: 200px;
-  width: 700px;
-  //width: max-content;
+  //width: 100%;
+  //width: 800px;
 }
+
+.contentTextOnly {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 </style>
