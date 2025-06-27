@@ -4,7 +4,7 @@
 }
 
 * {
-  font-family: "JetBrainsMono", monospace;
+  font-family: "JetBrains Mono";
 }
 
 html {
@@ -24,11 +24,26 @@ body {
   margin: 0;
   color: white;
   background: var(--lb-background, linear-gradient(360deg, rgb(15, 23, 42), rgb(33, 29, 37)));
-  font-family: "JetBrainsMono", monospace;
 
   font-variant-numeric: lining-nums tabular-nums;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
+
+  background: linear-gradient(
+                  to bottom,
+                  rgb(15, 13, 25) 0%,
+                  rgb(20, 17, 30) 35%,
+                  rgb(24, 20, 32) 50%,
+                  rgb(18, 15, 28) 65%,
+                  rgb(10, 10, 20) 100%
+  );
+  min-height: 100vh;
+
+  // Блокируем селект текста
+  user-select: none;       /* стандарт */
+  -webkit-user-select: none; /* для Safari */
+  -moz-user-select: none;    /* для Firefox */
+  -ms-user-select: none;     /* для старого IE/Edge */
 
 }
 

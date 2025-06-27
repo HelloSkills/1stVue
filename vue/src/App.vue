@@ -483,7 +483,7 @@ const selectedMenu = computed(() => {
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div :class="$style.container" class="text-center">
     <Memory class="mt-8 mb-16"/>
     <AppMenu
         :items="keys"
@@ -495,28 +495,7 @@ const selectedMenu = computed(() => {
 </template>
 
 <style lang="scss" module>
-
-body {
-  font-family: "JetBrains Mono";
-  background: linear-gradient(
-          to bottom,
-          rgb(15, 13, 25) 0%,
-          rgb(20, 17, 30) 35%,
-          rgb(24, 20, 32) 50%,
-          rgb(18, 15, 28) 65%,
-          rgb(10, 10, 20) 100%
-  );
-  min-height: 100vh;
-
-  // Блокируем селект текста
-  user-select: none;       /* стандарт */
-  -webkit-user-select: none; /* для Safari */
-  -moz-user-select: none;    /* для Firefox */
-  -ms-user-select: none;     /* для старого IE/Edge */
-}
-
-.container {
-  text-align: center;
-}
-
+//.container {
+//
+//}
 </style>
