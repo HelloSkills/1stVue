@@ -1,10 +1,14 @@
 <script setup>
-import {computed, ref} from 'vue'
-import MarkdownIt from 'markdown-it'
+import {computed, onMounted, ref} from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import AppMenu from './components/AppMenu.vue'
-import Memory from './components/memory.vue'
-import AppContent from "@/components/AppContent.vue";
+
+import MarkdownIt from 'markdown-it'
+
+import AppMenu from '/components/AppMenu.vue'
+import Memory from '/components/memory.vue'
+import AppContent from '/components/AppContent.vue'
+
+import { useSelectedMenu } from "../composables/useActiveIndex.js" // композабл и логика работы меню
 
 
 const md = new MarkdownIt()
@@ -465,20 +469,7 @@ onDeactivated(() => {
   ,
 }
 
-
-const activeIndex = ref(null)
-function handleChangeActiveIndex(index) {
-  // console.log('Handle do', activeIndex.value)
-  activeIndex.value = activeIndex.value === index ? null : index
-  // console.log('Handle posle', activeIndex.value)
-}
-const selectedMenu = computed(() => {
-  if (activeIndex.value == null) {
-    return null
-  }
-  const activeKey = keys[activeIndex.value]
-  return content[activeKey]
-})
+const { activeIndex, selectedMenu, handleChangeActiveIndex } = useSelectedMenu(keys, content) // деструктуризация комопзабла
 
 </script>
 
