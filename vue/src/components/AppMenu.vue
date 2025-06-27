@@ -1,19 +1,21 @@
 <script setup>
 import {computed, onMounted, ref} from 'vue'
 import AppContent from './AppContent.vue'
+
 const props = defineProps({
   items: Array,
   activeIndex: Number | null
 })
+
 const emit = defineEmits(['changeActiveIndex'])
 function onClick(index) {
-  // console.log('Emitik', index)
   emit('changeActiveIndex', index)
 }
+
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div :class="$style.container" class="gap-16 mb-24">
     <div v-for="(item, index) in items"
          :key="index"
          :class="[$style.navigation, activeIndex === index ? $style.active : '']"
@@ -28,20 +30,14 @@ function onClick(index) {
 .container {
   display: flex;
   flex-direction: row;
-  gap: 16px;
   justify-content: center;
-  color: white;
-  margin: auto;
-  width: max-content;
 }
 
 .navigation {
-  padding: 0.6em 1.2em;
-  color: #bbb;
-  font-weight: 600;
+  padding: 8px;
+  width: 80px;
   cursor: pointer;
   border-radius: 8px;
-  user-select: none;
   transition:
       background-color 0.3s ease,
       color 0.3s ease,

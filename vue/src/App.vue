@@ -483,8 +483,8 @@ const selectedMenu = computed(() => {
 </script>
 
 <template>
-  <div :class="$style.container" class="text-center">
-    <Memory class="mt-8 mb-16"/>
+  <div :class="$style.container" class="text-center pt-16">
+    <Memory class="mb-16"/>
     <AppMenu
         :items="keys"
         :activeIndex="activeIndex"

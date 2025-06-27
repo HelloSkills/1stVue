@@ -1,7 +1,7 @@
 <script setup>
-import {computed, ref, watch} from "vue";
-import MarkdownIt from 'markdown-it'
+import {computed, ref, watch} from "vue"
 
+import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
 
 function rendered(text) {
@@ -12,11 +12,10 @@ const props = defineProps({
   selectedMenu: Array | null,
 })
 
+// Следим за состоянием открытых вкладок и сбрасываем их при изменении в меню
 watch(
     () => props.selectedMenu,
     (newVal, oldVal) => {
-      // console.log(props.selectedMenu, newVal, oldVal)
-      // console.log('props.selectedMenu', props.selectedMenu[0].title.length)
       if (newVal !== oldVal) {
         activeText.value.clear()
       }
@@ -35,7 +34,7 @@ function toggleText(index) {
 </script>
 
 <template>
-  <div :class="$style.wrap" class="flex-col mt-16">
+  <div :class="$style.wrap" class="flex-col">
     <div
         v-for="(content, index) in selectedMenu"
         :key="index"
@@ -70,10 +69,9 @@ export default {
   gap: 16px;
   justify-content: center;
   align-items: center;
-  color: white;
-  margin: auto;
-  width: 100%;
 
+  //margin: auto;
+  //width: 100%;
 }
 
 .content {
@@ -94,23 +92,7 @@ export default {
 
 .contentTextOnly {
   background: none;
-  border: none;
-  padding: 0;
-}
-
-.markdown {
-  margin: 0;
-  padding: 0;
-}
-
-.markdown * {
-  margin: 0;
-  padding: 0;
-  line-height: 1.8;
-}
-
-.markdown ul {
-  list-style-type: none;
+  //border: none;
 }
 
 .markdown li {
@@ -123,31 +105,15 @@ export default {
 
 .markdown code {
   display: block;
-  margin: 0;
-  padding: 0;
   background: rgb(38, 34, 54);
   border: 1px solid #3a3553;
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9em;
   color: #3586de;
-  border-radius: 4px;
   margin-top: 8px;
   margin-bottom: 16px;
   padding: 8px;
   white-space: pre;     /* сохранить пробелы без сжатия */
-
 }
-
-.element {
-  //white-space: pre-line;
-  margin: 0;
-  padding: 0;
-  //line-height: 1.8; /* можно подстроить под комфорт */
-}
-.element > * {
-  margin: 0;
-  padding: 0;
-}
-
 </style>
