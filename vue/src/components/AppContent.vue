@@ -49,18 +49,12 @@ function toggleText(index) {
       </div>
 
       <div v-show="activeText.has(index)" :class="$style.text">
-        <RecursiveContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" class="mt-16 mb-24"/>
+        <AppContent v-if="content.items" :selectedMenu="content.items" :class="$style.items" class="mt-16 mb-24"/>
         <div v-else class="text-left ml-16" :class="$style.markdown" v-html="rendered(content.text)" />
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'RecursiveContent'
-}
-</script>
 
 <style lang="scss" module>
 .wrap {
