@@ -93,7 +93,7 @@ export default {
 }
 
 .text {
-  white-space: pre-line;
+  //white-space: pre-line;
 }
 
 .contentTextOnly {
@@ -103,31 +103,51 @@ export default {
 }
 
 .markdown {
-  ul {
-    list-style-type: none; /* убирает точки у списка */
-    padding: 0;
-    margin: 0;
-  }
-  li {
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    height: 1em;
-  }
-  strong {
-    color: #3586de;        /* цвет для выделенного текста (жирного) */
-  }
-  code {
-    //background-color: #2d2d2d;
-    color: #f8f8f2;
-    //padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9em;
-  }
-  //p {
-  //  margin-bottom: 1em;    /* отступ между параграфами */
-  //}
+  margin: 0;
+  padding: 0;
+}
+
+.markdown * {
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.markdown ul {
+  list-style-type: none;
+}
+
+.markdown strong {
+  color: #35ded0;
+}
+
+.markdown code {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: rgb(38, 34, 54);
+  border: 1px solid #3a3553;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  color: #3586de;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding: 8px;
+  white-space: pre;     /* сохранить пробелы без сжатия */
+
+}
+
+.element {
+  //white-space: pre-line;
+  margin: 0;
+  padding: 0;
+  //line-height: 1.8; /* можно подстроить под комфорт */
+}
+.element > * {
+  margin: 0;
+  padding: 0;
 }
 
 </style>
