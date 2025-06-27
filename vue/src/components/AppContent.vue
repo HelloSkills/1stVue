@@ -92,10 +92,6 @@ export default {
   box-sizing: border-box;
 }
 
-.text {
-  //white-space: pre-line;
-}
-
 .contentTextOnly {
   background: none;
   border: none;
@@ -115,6 +111,10 @@ export default {
 
 .markdown ul {
   list-style-type: none;
+}
+
+.markdown li {
+  margin-bottom: 8px;
 }
 
 .markdown strong {
