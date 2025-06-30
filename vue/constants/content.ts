@@ -1,4 +1,4 @@
-import { keysMap } from "./keysMap"
+import {keysMap} from "./keysMap"
 
 const content = {
     [keysMap.GIT]: [
@@ -168,7 +168,145 @@ const obj = {
 - ✘ Не используется повторно — без повторного объявления`
                 }
             ]
+        },
+        {
+            title: '📦 Импорт / Экспорт (Import / Export)',
+            items: [
+                {
+                    title: 'Named Export – Именованный экспорт',
+                    text: `\`\`\`js
+// file: utils.js
+export function sayHi() {
+  console.log("Hi")
+}
+\`\`\`
+
+- Особенности:
+- ✔ Можно экспортировать несколько сущностей из одного файла
+- ✔ Экспорт по имени — обязательно использовать то же имя при импорте
+- ✔ Удобно для автодополнения и навигации
+- ✘ При импорте обязательно указывать имя в \`{}\`
+`
+                },
+                {
+                    title: 'Named Import – Именованный импорт',
+                    text: `\`\`\`js
+// file: main.js
+import { sayHi } from './utils'
+
+sayHi()
+\`\`\`
+
+- Особенности:
+- ✔ Импорт строго по имени, указанному в export
+- ✔ Удобен при работе с несколькими функциями/константами
+- ✔ Можно делать алиас: \`import { sayHi as greet }\`
+`
+                },
+                {
+                    title: 'Default Export – Экспорт по умолчанию',
+                    text: `\`\`\`js
+// file: utils.js
+export default function sayHi() {
+  console.log("Hi")
+}
+\`\`\`
+
+- Особенности:
+- ✔ Только один экспорт по умолчанию в файле
+- ✔ При импорте можно задать любое имя
+- ✔ Удобно для основного функционала модуля
+`
+                },
+                {
+                    title: 'Default Import – Импорт по умолчанию',
+                    text: `\`\`\`js
+// file: main.js
+import sayHi from './utils'
+
+sayHi()
+\`\`\`
+
+- Особенности:
+- ✔ Имя импорта можно выбрать произвольно
+- ✔ Удобно, если в модуле один главный экспорт
+- ✘ Сложнее отслеживать имя при рефакторинге
+`
+                },
+                {
+                    title: 'Mixed Export – Смешанный экспорт (default + named)',
+                    text: `\`\`\`js
+// file: utils.js
+export default function sayHi() {
+  console.log("Hi")
+}
+
+export const version = '1.0.0'
+\`\`\`
+
+- Особенности:
+- ✔ Один default + сколько угодно named
+- ✔ Гибкость: главный экспорт + доп. функциональность
+- ✘ Немного сложнее читаемость при импорте
+`
+                },
+                {
+                    title: 'Mixed Import – Смешанный импорт (default + named)',
+                    text: `\`\`\`js
+// file: main.js
+import sayHi, { version } from './utils'
+
+sayHi()
+console.log(version)
+\`\`\`
+
+- Особенности:
+- ✔ Можно заимпортить всё в одной строке
+- ✔ Default импорт идёт первым, потом named через \`{}\`
+- ✘ Важно соблюдать порядок: default, затем named
+`
+                },
+                {
+                    title: 'Import All – Импорт всего содержимого',
+                    text: `\`\`\`js
+// file: utils.js
+export const sayHi = () => console.log("Hi")
+export const sayBye = () => console.log("Bye")
+\`\`\`
+
+\`\`\`js
+// file: main.js
+import * as utils from './utils'
+
+utils.sayHi()
+utils.sayBye()
+\`\`\`
+
+- Особенности:
+- ✔ Собирает все экспортируемые сущности в один объект
+- ✔ Удобно, если нужно использовать всё как модуль
+- ✘ Чуть более громоздкий синтаксис при использовании
+`
+                },
+                {
+                    title: 'Re-export – Переэкспорт',
+                    text: `\`\`\`js
+// file: say.js
+export const sayHi = () => console.log("Hi")
+
+// file: index.js
+export * from './say'
+\`\`\`
+
+- Особенности:
+- ✔ Позволяет объединить модули в один вход
+- ✔ Полезно в index.ts файлах или barrels
+- ✘ Сложнее отследить, откуда что пришло
+`
+                }
+            ]
         }
+
 
     ],
     [keysMap.Objects]: [
@@ -187,10 +325,8 @@ console.log(Object.values(user)) // ["Roman", 25"]
 \`\`\``
         }
     ],
-    [keysMap.Arrays]: [
-    ],
-    [keysMap.Styles]: [
-    ],
+    [keysMap.Arrays]: [],
+    [keysMap.Styles]: [],
     [keysMap.Vue]: [
         {
             title: '🖖 Vue — директивы',
@@ -312,73 +448,87 @@ onDeactivated(() => {
         }
 
     ],
-    [keysMap.Nuxt]: [
-    ],
+    [keysMap.Nuxt]: [],
     [keysMap.Links]: [
         {
             title: '📦 CSS & JS: библиотеки, шпаргалки, инструменты',
             items: [
-                { title: 'Tailwind Docs', text: 'https://tailwindcss.com/docs/text-align' },
-                { title: 'Sprite Generator', text: 'https://svgsprit.es' },
-                { title: 'Favicon Generator', text: 'https://realfavicongenerator.net' },
-                { title: 'CSS Cheatsheet', text: 'https://htmlcheatsheet.com/css/' },
-                { title: 'JS Cheatsheet (OverAPI)', text: 'https://overapi.com/javascript' },
-                { title: 'HTML Cheatsheet (OverAPI)', text: 'https://overapi.com/html' },
-                { title: 'CSS Cheatsheet (OverAPI)', text: 'https://overapi.com/css' },
-                { title: 'Doka JS Guide', text: 'https://doka.guide/js/' },
-                { title: 'CSS Grid Guide', text: 'https://grid.malven.co' },
-                { title: 'CSS Snippets', text: 'https://my-js.org/docs/other/snippets-css' },
-                { title: 'CSS Animation Easing', text: 'https://easings.net/en#/' },
-                { title: 'Base64 Image Converter', text: 'https://www.base64-image.de' },
-                { title: 'JS Обфускация (Habr)', text: 'https://habr.com/ru/post/533954/' },
-                { title: 'JS Обфускатор Webfanat', text: 'https://webfanat.com/obfuscator/' }
+                {title: 'Tailwind Docs', text: 'https://tailwindcss.com/docs/text-align'},
+                {title: 'Sprite Generator', text: 'https://svgsprit.es'},
+                {title: 'Favicon Generator', text: 'https://realfavicongenerator.net'},
+                {title: 'CSS Cheatsheet', text: 'https://htmlcheatsheet.com/css/'},
+                {title: 'JS Cheatsheet (OverAPI)', text: 'https://overapi.com/javascript'},
+                {title: 'HTML Cheatsheet (OverAPI)', text: 'https://overapi.com/html'},
+                {title: 'CSS Cheatsheet (OverAPI)', text: 'https://overapi.com/css'},
+                {title: 'Doka JS Guide', text: 'https://doka.guide/js/'},
+                {title: 'CSS Grid Guide', text: 'https://grid.malven.co'},
+                {title: 'CSS Snippets', text: 'https://my-js.org/docs/other/snippets-css'},
+                {title: 'CSS Animation Easing', text: 'https://easings.net/en#/'},
+                {title: 'Base64 Image Converter', text: 'https://www.base64-image.de'},
+                {title: 'JS Обфускация (Habr)', text: 'https://habr.com/ru/post/533954/'},
+                {title: 'JS Обфускатор Webfanat', text: 'https://webfanat.com/obfuscator/'}
             ]
         },
         {
             title: '⚙️ Инструменты и тулзы',
             items: [
-                { title: 'CSS Easing Generator', text: 'https://tools.webdevpuneet.com/css-easing-generator/' },
-                { title: 'Настройка VS Code', text: 'https://webdesign-master.ru/blog/tools/vscode.html' },
-                { title: 'Оптимизация видео для сайтов', text: 'https://www.comss.ru/page.php?id=6780' }
+                {title: 'CSS Easing Generator', text: 'https://tools.webdevpuneet.com/css-easing-generator/'},
+                {title: 'Настройка VS Code', text: 'https://webdesign-master.ru/blog/tools/vscode.html'},
+                {title: 'Оптимизация видео для сайтов', text: 'https://www.comss.ru/page.php?id=6780'}
             ]
         },
         {
             title: '📈 Метрики и аналитика',
             items: [
-                { title: 'Google Analytics Setup', text: 'https://support.google.com/analytics/answer/10269537?ref_topic=1009620' },
-                { title: 'Яндекс Метрика через GTM', text: 'https://ppc.world/articles/kak-ustanovit-schetchik-metriki-na-sayt-s-pomoschyu-google-tag-manager/' }
+                {
+                    title: 'Google Analytics Setup',
+                    text: 'https://support.google.com/analytics/answer/10269537?ref_topic=1009620'
+                },
+                {
+                    title: 'Яндекс Метрика через GTM',
+                    text: 'https://ppc.world/articles/kak-ustanovit-schetchik-metriki-na-sayt-s-pomoschyu-google-tag-manager/'
+                }
             ]
         },
         {
             title: '🎠 Слайдеры, анимации и UI',
             items: [
-                { title: 'Подборка слайдеров (3D и др.)', text: 'https://atuin.ru/blog/slajdery-i-karuseli/' },
-                { title: 'Интересное по тегу 3D', text: 'https://atuin.ru/blog/tag/3d/' },
-                { title: 'Плавное появление страницы', text: 'https://snipp.ru/jquery/smooth-pages' },
-                { title: 'Слайдер без JS (Scroll Snap)', text: 'https://tproger.ru/articles/css-scroll-snap-moshhnoe-svojstvo-dlja-sozdanija-prokruchivaemyh-kontejnerov-bez-javascript/' },
-                { title: 'Popup на чистом JS', text: 'https://webdevtips.pro/js/pure-js-popup/' }
+                {title: 'Подборка слайдеров (3D и др.)', text: 'https://atuin.ru/blog/slajdery-i-karuseli/'},
+                {title: 'Интересное по тегу 3D', text: 'https://atuin.ru/blog/tag/3d/'},
+                {title: 'Плавное появление страницы', text: 'https://snipp.ru/jquery/smooth-pages'},
+                {
+                    title: 'Слайдер без JS (Scroll Snap)',
+                    text: 'https://tproger.ru/articles/css-scroll-snap-moshhnoe-svojstvo-dlja-sozdanija-prokruchivaemyh-kontejnerov-bez-javascript/'
+                },
+                {title: 'Popup на чистом JS', text: 'https://webdevtips.pro/js/pure-js-popup/'}
             ]
         },
         {
             title: '💠 Прелоадеры и курсоры',
             items: [
-                { title: 'Простой прелоадер', text: 'https://smartlanding.biz/kak-sdelat-preloader.html' },
-                { title: 'Коллекция прелоадеров (Spinkit)', text: 'https://tobiasahlin.com/spinkit/' },
-                { title: 'Как изменить курсор (Pandoge)', text: 'https://www.pandoge.com/stati-i-sovety/kak-izmenit-standartnyy-kursor-na-sayte' },
-                { title: 'Изменение курсора (mojwp)', text: 'https://mojwp.ru/cursor-css.html' }
+                {title: 'Простой прелоадер', text: 'https://smartlanding.biz/kak-sdelat-preloader.html'},
+                {title: 'Коллекция прелоадеров (Spinkit)', text: 'https://tobiasahlin.com/spinkit/'},
+                {
+                    title: 'Как изменить курсор (Pandoge)',
+                    text: 'https://www.pandoge.com/stati-i-sovety/kak-izmenit-standartnyy-kursor-na-sayte'
+                },
+                {title: 'Изменение курсора (mojwp)', text: 'https://mojwp.ru/cursor-css.html'}
             ]
         },
         {
             title: '🧩 Стилизация элементов',
             items: [
-                { title: 'Стилизация Checkbox', text: 'https://computy.ru/blog/ispolzovanie-i-stilizacziya-input-checkbox/' }
+                {
+                    title: 'Стилизация Checkbox',
+                    text: 'https://computy.ru/blog/ispolzovanie-i-stilizacziya-input-checkbox/'
+                }
             ]
         },
         {
             title: '🧠 ИИ, генераторы, помощники',
             items: [
-                { title: 'DuckDuckGo Chat AI', text: 'https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1' },
-                { title: 'GPT China (HuggingFace)', text: 'https://huggingface.co/spaces/Qwen/Qwen2.5-Coder-Artifacts' }
+                {title: 'DuckDuckGo Chat AI', text: 'https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1'},
+                {title: 'GPT China (HuggingFace)', text: 'https://huggingface.co/spaces/Qwen/Qwen2.5-Coder-Artifacts'}
             ]
         }
     ],
@@ -442,4 +592,4 @@ onDeactivated(() => {
     ,
 }
 
-export { content }
+export {content}
