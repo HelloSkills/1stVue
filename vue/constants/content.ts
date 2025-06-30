@@ -95,6 +95,82 @@ const content = {
             ]
         },
         {
+            title: '📦 Объявление переменных: const, let, var',
+            items: [
+                {
+                    title: 'const – Константа (не переназначается)',
+                    text: `\`\`\`js
+const name = 'Roman'
+// name = 'Другой' ❌ ошибка
+\`\`\`
+
+- Особенности:
+- ✔ Нельзя переназначить (но можно менять содержимое объекта)
+- ✔ Блочная область видимости ({} внутри if, for и т.д.)
+- ✔ Не всплывает — доступна только после строки объявления
+- ✘ Обязательно инициализировать сразу`
+                },
+                {
+                    title: 'let – Переменная с блочной областью',
+                    text: `\`\`\`js
+let counter = 0
+counter++
+\`\`\`
+
+- Особенности:
+- ✔ Можно переопределять значение
+- ✔ Блочная область видимости
+- ✔ Не всплывает — создаётся, но не инициализируется (TDZ)
+- ✔ Используется чаще всего в циклах и логике`
+                },
+                {
+                    title: 'var – Устаревшее объявление',
+                    text: `\`\`\`js
+var age = 30
+\`\`\`
+
+- Особенности:
+- ✘ Имеет **функциональную** область видимости (не блочную!)
+- ✔ Всплывает — доступна до строки объявления (undefined)
+- ✘ Может вести к багам — избегай использования
+- ⚠ Используется только в старом коде`
+                },
+                {
+                    title: 'Область видимости (Scope)',
+                    text: `\`\`\`js
+function test() {
+  if (true) {
+    let x = 1
+    var y = 2
+  }
+  console.log(x) // ❌ ошибка
+  console.log(y) // ✅ 2 (var видна во всей функции)
+}
+\`\`\`
+
+- Особенности:
+- ✔ \`let\` и \`const\` — видны только в блоке \`{...}\`
+- ✔ \`var\` — видна во всей функции
+- ✘ \`var\` игнорирует блочную структуру (например, if)`
+                },
+                {
+                    title: 'Всплытие (Hoisting)',
+                    text: `\`\`\`js
+console.log(a) // undefined (var всплыла)
+var a = 5
+
+console.log(b) // ❌ ошибка (ReferenceError)
+let b = 10
+\`\`\`
+
+- Особенности:
+- ✔ \`var\` всплывает — переменная создаётся и инициализируется как \`undefined\`
+- ✔ \`let\` и \`const\` тоже всплывают, но попадают в TDZ (зона временной недоступности)
+- ✘ Обращение к \`let/const\` до строки объявления вызывает ошибку`
+                }
+            ]
+        },
+        {
             title: '📘 Объявления функции',
             items: [
                 {
@@ -456,83 +532,96 @@ Promise.allSettled([promise1, promise2])
             ]
         },
         {
-            title: '📦 Объявление переменных: const, let, var',
+            title: '🔒 Замыкания (Closures)',
             items: [
                 {
-                    title: 'const – Константа (не переназначается)',
+                    title: 'Что такое замыкание?',
                     text: `\`\`\`js
-const name = 'Roman'
-// name = 'Другой' ❌ ошибка
-\`\`\`
-
-- Особенности:
-- ✔ Нельзя переназначить (но можно менять содержимое объекта)
-- ✔ Блочная область видимости ({} внутри if, for и т.д.)
-- ✔ Не всплывает — доступна только после строки объявления
-- ✘ Обязательно инициализировать сразу`
-                },
-                {
-                    title: 'let – Переменная с блочной областью',
-                    text: `\`\`\`js
-let counter = 0
-counter++
-\`\`\`
-
-- Особенности:
-- ✔ Можно переопределять значение
-- ✔ Блочная область видимости
-- ✔ Не всплывает — создаётся, но не инициализируется (TDZ)
-- ✔ Используется чаще всего в циклах и логике`
-                },
-                {
-                    title: 'var – Устаревшее объявление',
-                    text: `\`\`\`js
-var age = 30
-\`\`\`
-
-- Особенности:
-- ✘ Имеет **функциональную** область видимости (не блочную!)
-- ✔ Всплывает — доступна до строки объявления (undefined)
-- ✘ Может вести к багам — избегай использования
-- ⚠ Используется только в старом коде`
-                },
-                {
-                    title: 'Область видимости (Scope)',
-                    text: `\`\`\`js
-function test() {
-  if (true) {
-    let x = 1
-    var y = 2
+function outer() {
+  const name = 'Roman'
+  return function inner() {
+    console.log(name)
   }
-  console.log(x) // ❌ ошибка
-  console.log(y) // ✅ 2 (var видна во всей функции)
 }
+
+const sayName = outer()
+sayName() // 'Roman'
 \`\`\`
 
 - Особенности:
-- ✔ \`let\` и \`const\` — видны только в блоке \`{...}\`
-- ✔ \`var\` — видна во всей функции
-- ✘ \`var\` игнорирует блочную структуру (например, if)`
+- ✔ Внутренняя функция "помнит" переменные внешней
+- ✔ Замыкание создаётся при возврате функции
+- ✔ Используется для скрытия данных и состояния`
                 },
                 {
-                    title: 'Всплытие (Hoisting)',
+                    title: 'Замыкание сохраняет доступ к переменным',
                     text: `\`\`\`js
-console.log(a) // undefined (var всплыла)
-var a = 5
+function counter() {
+  let count = 0
+  return () => ++count
+}
 
-console.log(b) // ❌ ошибка (ReferenceError)
-let b = 10
+const increment = counter()
+console.log(increment()) // 1
+console.log(increment()) // 2
 \`\`\`
 
 - Особенности:
-- ✔ \`var\` всплывает — переменная создаётся и инициализируется как \`undefined\`
-- ✔ \`let\` и \`const\` тоже всплывают, но попадают в TDZ (зона временной недоступности)
-- ✘ Обращение к \`let/const\` до строки объявления вызывает ошибку`
+- ✔ \`count\` сохраняется между вызовами
+- ✔ Можно создавать приватные состояния
+- ✔ Полезно в Nuxt/Vue для трекеров, генераторов`
+                },
+                {
+                    title: 'Замыкание в цикле (ошибка с var)',
+                    text: `\`\`\`js
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100)
+}
+// Вывод: 3, 3, 3 (а не 0, 1, 2)
+\`\`\`
+
+- Особенности:
+- ✘ \`var\` не создаёт отдельную область видимости на каждой итерации
+- ✔ Решается через \`let\` или IIFE
+- ✔ Проблема замыкания на общую переменную`
+                },
+                {
+                    title: 'Правильное замыкание в цикле (с let)',
+                    text: `\`\`\`js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100)
+}
+// Вывод: 0, 1, 2
+\`\`\`
+
+- Особенности:
+- ✔ \`let\` создаёт новую переменную на каждой итерации
+- ✔ Замыкание работает как ожидается
+- ✔ Используется в асинхронных циклах и UI-логике`
+                },
+                {
+                    title: 'Приватные данные через замыкание',
+                    text: `\`\`\`js
+function createSecret() {
+  const secret = '🔐'
+  return {
+    getSecret() {
+      return secret
+    }
+  }
+}
+
+const safe = createSecret()
+console.log(safe.getSecret()) // '🔐'
+\`\`\`
+
+- Особенности:
+- ✔ Переменные недоступны извне напрямую
+- ✔ Часто используется в фабриках, API, сервисах
+- ✔ Помогает инкапсулировать данные`
                 }
             ]
         },
-
-
 
     ],
     [keysMap.Objects]: [
@@ -678,84 +767,69 @@ onDeactivated(() => {
     [keysMap.Links]: [
         {
             title: '📦 CSS & JS: библиотеки, шпаргалки, инструменты',
-            items: [
-                {title: 'Tailwind Docs', text: 'https://tailwindcss.com/docs/text-align'},
-                {title: 'Sprite Generator', text: 'https://svgsprit.es'},
-                {title: 'Favicon Generator', text: 'https://realfavicongenerator.net'},
-                {title: 'CSS Cheatsheet', text: 'https://htmlcheatsheet.com/css/'},
-                {title: 'JS Cheatsheet (OverAPI)', text: 'https://overapi.com/javascript'},
-                {title: 'HTML Cheatsheet (OverAPI)', text: 'https://overapi.com/html'},
-                {title: 'CSS Cheatsheet (OverAPI)', text: 'https://overapi.com/css'},
-                {title: 'Doka JS Guide', text: 'https://doka.guide/js/'},
-                {title: 'CSS Grid Guide', text: 'https://grid.malven.co'},
-                {title: 'CSS Snippets', text: 'https://my-js.org/docs/other/snippets-css'},
-                {title: 'CSS Animation Easing', text: 'https://easings.net/en#/'},
-                {title: 'Base64 Image Converter', text: 'https://www.base64-image.de'},
-                {title: 'JS Обфускация (Habr)', text: 'https://habr.com/ru/post/533954/'},
-                {title: 'JS Обфускатор Webfanat', text: 'https://webfanat.com/obfuscator/'}
-            ]
+            text: `
+- [Tailwind Docs](https://tailwindcss.com/docs/text-align)
+- [Sprite Generator](https://svgsprit.es)
+- [Favicon Generator](https://realfavicongenerator.net)
+- [CSS Cheatsheet](https://htmlcheatsheet.com/css/)
+- [JS Cheatsheet (OverAPI)](https://overapi.com/javascript)
+- [HTML Cheatsheet (OverAPI)](https://overapi.com/html)
+- [CSS Cheatsheet (OverAPI)](https://overapi.com/css)
+- [Doka JS Guide](https://doka.guide/js/)
+- [CSS Grid Guide](https://grid.malven.co)
+- [CSS Snippets](https://my-js.org/docs/other/snippets-css)
+- [CSS Animation Easing](https://easings.net/en#/)
+- [Base64 Image Converter](https://www.base64-image.de)
+- [JS Обфускация (Habr)](https://habr.com/ru/post/533954/)
+- [JS Обфускатор Webfanat](https://webfanat.com/obfuscator/)
+`
         },
         {
             title: '⚙️ Инструменты и тулзы',
-            items: [
-                {title: 'CSS Easing Generator', text: 'https://tools.webdevpuneet.com/css-easing-generator/'},
-                {title: 'Настройка VS Code', text: 'https://webdesign-master.ru/blog/tools/vscode.html'},
-                {title: 'Оптимизация видео для сайтов', text: 'https://www.comss.ru/page.php?id=6780'}
-            ]
+            text: `
+- [CSS Easing Generator](https://tools.webdevpuneet.com/css-easing-generator/)
+- [Настройка VS Code](https://webdesign-master.ru/blog/tools/vscode.html)
+- [Оптимизация видео для сайтов](https://www.comss.ru/page.php?id=6780)
+`
         },
         {
             title: '📈 Метрики и аналитика',
-            items: [
-                {
-                    title: 'Google Analytics Setup',
-                    text: 'https://support.google.com/analytics/answer/10269537?ref_topic=1009620'
-                },
-                {
-                    title: 'Яндекс Метрика через GTM',
-                    text: 'https://ppc.world/articles/kak-ustanovit-schetchik-metriki-na-sayt-s-pomoschyu-google-tag-manager/'
-                }
-            ]
+            text: `
+- [Google Analytics Setup](https://support.google.com/analytics/answer/10269537?ref_topic=1009620)
+- [Яндекс Метрика через GTM](https://ppc.world/articles/kak-ustanovit-schetchik-metriki-na-sayt-s-pomoschyu-google-tag-manager/)
+`
         },
         {
             title: '🎠 Слайдеры, анимации и UI',
-            items: [
-                {title: 'Подборка слайдеров (3D и др.)', text: 'https://atuin.ru/blog/slajdery-i-karuseli/'},
-                {title: 'Интересное по тегу 3D', text: 'https://atuin.ru/blog/tag/3d/'},
-                {title: 'Плавное появление страницы', text: 'https://snipp.ru/jquery/smooth-pages'},
-                {
-                    title: 'Слайдер без JS (Scroll Snap)',
-                    text: 'https://tproger.ru/articles/css-scroll-snap-moshhnoe-svojstvo-dlja-sozdanija-prokruchivaemyh-kontejnerov-bez-javascript/'
-                },
-                {title: 'Popup на чистом JS', text: 'https://webdevtips.pro/js/pure-js-popup/'}
-            ]
+            text: `
+- [Подборка слайдеров (3D и др.)](https://atuin.ru/blog/slajdery-i-karuseli/)
+- [Интересное по тегу 3D](https://atuin.ru/blog/tag/3d/)
+- [Плавное появление страницы](https://snipp.ru/jquery/smooth-pages)
+- [Слайдер без JS (Scroll Snap)](https://tproger.ru/articles/css-scroll-snap-moshhnoe-svojstvo-dlja-sozdanija-prokruchivaemyh-kontejnerov-bez-javascript/)
+- [Popup на чистом JS](https://webdevtips.pro/js/pure-js-popup/)
+`
         },
         {
             title: '💠 Прелоадеры и курсоры',
-            items: [
-                {title: 'Простой прелоадер', text: 'https://smartlanding.biz/kak-sdelat-preloader.html'},
-                {title: 'Коллекция прелоадеров (Spinkit)', text: 'https://tobiasahlin.com/spinkit/'},
-                {
-                    title: 'Как изменить курсор (Pandoge)',
-                    text: 'https://www.pandoge.com/stati-i-sovety/kak-izmenit-standartnyy-kursor-na-sayte'
-                },
-                {title: 'Изменение курсора (mojwp)', text: 'https://mojwp.ru/cursor-css.html'}
-            ]
+            text: `
+- [Простой прелоадер](https://smartlanding.biz/kak-sdelat-preloader.html)
+- [Коллекция прелоадеров (Spinkit)](https://tobiasahlin.com/spinkit/)
+- [Как изменить курсор (Pandoge)](https://www.pandoge.com/stati-i-sovety/kak-izmenit-standartnyy-kursor-na-sayte)
+- [Изменение курсора (mojwp)](https://mojwp.ru/cursor-css.html)
+`
         },
         {
             title: '🧩 Стилизация элементов',
-            items: [
-                {
-                    title: 'Стилизация Checkbox',
-                    text: 'https://computy.ru/blog/ispolzovanie-i-stilizacziya-input-checkbox/'
-                }
-            ]
+            text: `
+- [Стилизация Checkbox](https://computy.ru/blog/ispolzovanie-i-stilizacziya-input-checkbox/)
+`
         },
         {
             title: '🧠 ИИ, генераторы, помощники',
-            items: [
-                {title: 'DuckDuckGo Chat AI', text: 'https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1'},
-                {title: 'GPT China (HuggingFace)', text: 'https://huggingface.co/spaces/Qwen/Qwen2.5-Coder-Artifacts'}
-            ]
+            text: `
+- [DuckDuckGo Chat AI](https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1)
+- [GPT China (HuggingFace)](https://huggingface.co/spaces/Qwen/Qwen2.5-Coder-Artifacts)
+`
         }
     ],
     [keysMap.Hotkeys]: [
@@ -764,6 +838,8 @@ onDeactivated(() => {
             text: `- **Ctrl + D** – Дублировать строку/блок
 - **Ctrl + Y** – Удалить строку
 - **Shift + Alt + ↑ / ↓** – Переместить строку вверх/вниз
+- **Ctrl + ]** → перейти к закрывающей скобке
+- **Ctrl + [** → перейти к открывающей скобке
 - **Ctrl + Alt + L** – Форматировать код
 - **Ctrl + /** – Закомментировать строку
 - **Ctrl + Shift + /** – Закомментировать блок
@@ -814,8 +890,7 @@ onDeactivated(() => {
             text: `- **Ctrl + Shift + A** – Показать все доступные горячие клавиши
 - **Ctrl + Shift + A** – Переопределить шорткаты (Find Action)`
         }
-    ]
-    ,
+    ],
 }
 
 export {content}

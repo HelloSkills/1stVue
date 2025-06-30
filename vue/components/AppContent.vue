@@ -1,8 +1,8 @@
 <script setup>
 import {computed, ref, watch} from "vue"
+import { useMarkdownIt } from "../composables/useMarkdown.ts"
 
-import MarkdownIt from 'markdown-it'
-const md = new MarkdownIt()
+const md = useMarkdownIt()
 
 function rendered(text) {
   return md.render(text || '')
@@ -11,6 +11,8 @@ function rendered(text) {
 const props = defineProps({
   selectedMenu: Array | null,
 })
+
+console.log('selectedMenu', props.selectedMenu)
 
 // Следим за состоянием открытых вкладок и сбрасываем их при изменении в меню
 watch(
@@ -109,5 +111,11 @@ function toggleText(index) {
   margin-bottom: 16px;
   padding: 8px;
   white-space: pre;     /* сохранить пробелы без сжатия */
+}
+
+.markdown a {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 </style>
