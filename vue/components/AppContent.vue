@@ -118,4 +118,10 @@ function toggleText(index) {
   justify-content: center;
   text-align: center;
 }
+
+.markdown a:hover {
+  color: #35ded0;
+  transform: scale(1.03);
+  transition: 0.3s;
+}
 </style>
