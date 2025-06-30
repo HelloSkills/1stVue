@@ -4,6 +4,7 @@ const keysMap = {
     'Objects': 'OBJECT',
     'Arrays': 'ARRAYS',
     'Styles': 'STYLES',
+    'Browser': 'BROWSER',
     'Vue': 'VUE',
     'Nuxt': 'NUXT',
     'Links': 'LINKS',
