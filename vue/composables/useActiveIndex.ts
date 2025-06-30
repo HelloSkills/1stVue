@@ -1,7 +1,6 @@
 import {computed, ref} from "vue"
 
 export function useSelectedMenu(keys, content) {
-    console.log('Привет из useSelectedMenu', keys, content)
     const activeIndex = ref(null)
 
     function handleChangeActiveIndex(index) {

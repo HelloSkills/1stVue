@@ -12,8 +12,6 @@ const props = defineProps({
   selectedMenu: Array | null,
 })
 
-console.log('selectedMenu', props.selectedMenu)
-
 // Следим за состоянием открытых вкладок и сбрасываем их при изменении в меню
 watch(
     () => props.selectedMenu,
@@ -121,7 +119,7 @@ function toggleText(index) {
 
 .markdown a:hover {
   color: #35ded0;
-  transform: scale(1.03);
-  transition: 0.3s;
+  transform: scale(1.05);
+  transition: 0.3s ease;
 }
 </style>
