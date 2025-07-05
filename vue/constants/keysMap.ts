@@ -3,6 +3,7 @@ const keysMap = {
     'JS': 'JS',
     'Objects': 'OBJECT',
     'Arrays': 'ARRAYS',
+    'Markup': 'MARKUP',
     'Styles': 'STYLES',
     'Browser': 'BROWSER',
     'Vue': 'VUE',
