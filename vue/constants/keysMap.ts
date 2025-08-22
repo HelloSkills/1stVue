@@ -8,6 +8,7 @@ const keysMap = {
     'Browser': 'BROWSER',
     'Vue': 'VUE',
     'Nuxt': 'NUXT',
+    'TS': 'TS',
     'Links': 'LINKS',
     'Hotkeys': 'HOTKEYS',
 }
